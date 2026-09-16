@@ -1,0 +1,20 @@
+{
+  "name": "mediasaver-extension",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build && node scripts/prepare-dist.js",
+    "build:store": "tsc --noEmit && vite build && node scripts/prepare-dist.js --store",
+    "test": "vitest run",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "typescript": "^5.5",
+    "vite": "^6.0",
+    "vitest": "^2.1",
+    "jsdom": "^24.1",
+    "@types/chrome": "^0.0.280"
+  }
+}

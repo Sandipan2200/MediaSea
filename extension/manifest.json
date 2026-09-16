@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "MediaSaver",
+  "version": "0.1.0",
+  "description": "Detect downloadable media from public page links (Pinterest, direct video) and save it. No YouTube, no login-wall bypass.",
+  "action": {
+    "default_popup": "src/popup.html",
+    "default_title": "MediaSaver"
+  },
+  "permissions": ["downloads", "storage"],
+  "host_permissions": ["https://api.mediasaver.example/*", "http://localhost:8000/*"]
+}

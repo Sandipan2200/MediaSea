@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MediaSaver</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app" aria-label="MediaSaver">
+      <header class="app-header">
+        <h1>MediaSaver</h1>
+        <button id="settingsToggle" class="icon-btn" aria-label="Open settings" aria-expanded="false" title="Settings">⚙</button>
+      </header>
+      <!-- Pure-HTML boot signal (no JS needed): if this line is still visible,
+           the popup's script never ran — the extension was loaded from the wrong
+           folder (must be extension/dist, not extension/) or not reloaded after
+           a rebuild. wireUp() removes it on startup. -->
+      <p id="bootMsg" class="muted">Starting MediaSaver…</p>
+
+      <section id="settingsPanel" class="panel" hidden aria-label="Settings">
+        <h2>Settings</h2>
+        <label class="field">
+          <span>API base</span>
+          <input id="apiBaseInput" type="url" inputmode="url" spellcheck="false" />
+        </label>
+        <label class="field">
+          <span>Default quality</span>
+          <select id="qualitySelect">
+            <option value="highest">Highest available</option>
+            <option value="lowest">Lowest (smallest file)</option>
+            <option value="ask">Always ask (list all)</option>
+          </select>
+        </label>
+        <label class="field inline">
+          <span>Theme</span>
+          <select id="themeSelect">
+            <option value="dark">Dark</option>
+            <option value="light">Light</option>
+          </select>
+        </label>
+        <div class="row">
+          <button id="saveSettingsBtn" class="btn primary">Save</button>
+          <button id="clearHistoryBtn" class="btn danger">Clear history</button>
+        </div>
+        <div class="row">
+          <button id="testConnBtn" class="btn">Test connection</button>
+        </div>
+        <div id="settingsMsg" class="muted" role="status" aria-live="polite"></div>
+        <h3>Supported right now</h3>
+        <ul class="support-list">
+          <li>Pinterest public pins — all image sizes + video renditions the post serves</li>
+          <li>Instagram public posts/reels — where the public page exposes the media (fragile, may break without notice)</li>
+          <li>Direct public pages — raw video files, HLS/DASH renditions</li>
+        </ul>
+        <p class="muted">YouTube is intentionally never supported. Facebook / X are not built yet.</p>
+        <p class="muted"><a id="privacyLink" href="https://mediasaver.example/privacy" target="_blank" rel="noreferrer">Privacy policy</a></p>
+      </section>
+
+      <section aria-label="Analyze a link">
+        <label class="field" for="urlInput"><span>Paste a public media link</span></label>
+        <div class="row">
+          <input
+            id="urlInput"
+            type="url"
+            inputmode="url"
+            placeholder="https://www.pinterest.com/pin/…"
+            autocomplete="off"
+            spellcheck="false"
+            aria-describedby="statusRegion"
+          />
+          <button id="pasteBtn" class="btn" aria-label="Paste from clipboard">Paste</button>
+        </div>
+        <button id="analyzeBtn" class="btn primary block">Analyze</button>
+      </section>
+
+      <div id="statusRegion" role="status" aria-live="polite" class="status" hidden></div>
+
+      <section id="results" aria-label="Results"></section>
+
+      <section aria-label="Download history">
+        <h2>History <span class="muted">(this device only)</span></h2>
+        <ul id="historyList" class="history"></ul>
+      </section>
+    </main>
+    <script type="module" src="./popup.ts"></script>
+  </body>
+</html>
